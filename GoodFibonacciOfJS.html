@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+   # 有效率的Fibonacci演算法(JavaScript 重構版)
+   # 程式建置日期: October 8th, 2020
+   # 作者: 周彥廷(YEN-TING ,CHOU; Tim Chou)
+   # 參考文獻: Michael T. Goodrich, Roberto Tamassia, Michael H. Goldwasser ,余步雲, 林志浩，資料結構與演算法: 使用JAVA(第六版)。新北市:全華圖書股份有限公司，2017年12月。
+-->
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Good Fibonacci</title>
+</head>
+<body>
+    <script>
+        function goodFibonacci(n){//改良後效能較高的Fibonacci演算法，且計算巨大數據時"不會"當機。
+            if(n <= 1){
+                var answer = new Array(n,0);
+                return answer;
+            }else{
+                var temp = goodFibonacci(n - 1);
+                var answer = new Array(temp[0] + temp[1] ,temp[0]);
+                return answer;
+            }
+        }
+        function badFibonacci(n){//傳統效能較差的Fibonacci演算法，且計算巨大數據時會當機。
+            if(n <= 1){
+                return n;
+            }else{
+                return badFibonacci(n - 2) + badFibonacci(n - 1);
+            }
+        }
+        function main(){
+            document.write("<h1>將兩個演算法比較計算及其結果: </h1>"+'goodFibonacci(10) = '+ goodFibonacci(10)[0]+"<br>");
+            document.write('badFibonacci(10) = '+ badFibonacci(10)+"<hr/><h1>將兩個演算法比較計算之效能: </h1>");
+            document.write('goodFibonacci(100) = '+ goodFibonacci(100)[0]+"<br><br>");
+			document.write("<p>做傳統效能較差的Fibonacci演算法的測試時之原始程式碼: <br> "+'document.write("badFibonacci(10) = "+ badFibonacci(100));'+" \\\\  說明:因為會當機，因此先註解，但可以取消註解測試其及效能。</p>");//說明。
+            //document.write('badFibonacci(10) = '+ badFibonacci(100));//因為會當機，因此先註解，但可以取消註解測試其及效能。
+        }
+        main();
+    </script>
+</body>
+</html>
